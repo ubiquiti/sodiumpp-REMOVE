@@ -19,11 +19,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/sodiumpp/include)
 
 if(SODIUMPP_STATIC)
 	add_library(sodiumpp STATIC sodiumpp/sodiumpp.cpp sodiumpp/z85/z85.c sodiumpp/z85/z85_impl.cpp)
-    find_library(SODIUMLIB libsodium.a)
+    find_library(SODIUMLIB libsodium.a PATHS /usr/${CMAKE_LIBRARY_ARCHITECTURE}/lib)
 else()
 	add_library(sodiumpp SHARED sodiumpp/sodiumpp.cpp sodiumpp/z85/z85.c sodiumpp/z85/z85_impl.cpp)
     target_link_libraries(sodiumpp sodium)
-    find_library(SODIUMLIB sodium)
+    find_library(SODIUMLIB sodium NO_DEFAULT_PATH PATHS /usr/${CMAKE_LIBRARY_ARCHITECTURE}/lib)
 endif()
 
 if(SODIUMPP_EXAMPLE)
