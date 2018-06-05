@@ -1,0 +1,11 @@
+Section: contrib/python
+Source: libsodiumpp
+Priority: extra
+Maintainer: UBNT Package Maintainers <maintainers@ubnt.com>
+Build-Depends: debhelper (>= 5), python-dev (>= 2.7.3), python-pycparser
+Standards-Version: 3.7.2
+
+Package: libsodiumpp
+Architecture: any
+Description: C++ API for NaCLl
+ Implementation for a C++ API for libsodium

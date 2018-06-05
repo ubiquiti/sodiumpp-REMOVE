@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+BUILD_DIR = obj-$(DEB_HOST_GNU_TYPE)
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	mkdir -p $(BUILD_DIR)
+	cd $(BUILD_DIR) && \
+	cmake -DCMAKE_TOOLCHAIN_FILE=../mips-toolchain.cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+
+override_dh_usrlocal:
+override_dh_shlibdeps:
