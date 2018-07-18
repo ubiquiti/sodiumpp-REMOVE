@@ -3,6 +3,7 @@
 export DH_VERBOSE=1
 
 BUILD_DIR = obj-$(DEB_HOST_GNU_TYPE)
+CUR_DIR = $(shell pwd)
 
 %:
 	dh $@
@@ -11,6 +12,19 @@ override_dh_auto_configure:
 	mkdir -p $(BUILD_DIR)
 	cd $(BUILD_DIR) && \
 	cmake -DCMAKE_TOOLCHAIN_FILE=../mips-toolchain.cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+
+override_dh_auto_build:
+	cd $(BUILD_DIR) && \
+	make
+
+override_dh_auto_install:
+	cd $(BUILD_DIR) && \
+	make DESTDIR=$(CUR_DIR)/debian/libsodiumpp install
+
+override_dh_clean:
+	rm -rf $(BUILD_DIR)
+	rm -rf $(CUR_DIR)/debian/libsodiumpp*
+	rm -rf $(CUR_DIR)/debian/files
 
 override_dh_usrlocal:
 override_dh_shlibdeps:
