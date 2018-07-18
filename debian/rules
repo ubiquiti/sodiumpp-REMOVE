@@ -4,11 +4,20 @@ export DH_VERBOSE=1
 
 BUILD_DIR = obj-$(DEB_HOST_GNU_TYPE)
 CUR_DIR = $(shell pwd)
+LIBSODIUM = libsodium-1.0.16
+LIBSODIUM_DIR = $(CUR_DIR)/modules/$(LIBSODIUM)
+LIBSODIUM_SO = $(LIBSODIUM_DIR)/src/libsodium/.libs/libsodium.so
 
 %:
 	dh $@
 
-override_dh_auto_configure:
+$(LIBSODIUM_SO):
+	cd modules && tar xf $(LIBSODIUM).tar.gz
+	cd $(LIBSODIUM_DIR) && \
+	./configure --host=$(DEB_HOST_GNU_TYPE) && \
+	make
+
+override_dh_auto_configure: $(LIBSODIUM_SO)
 	mkdir -p $(BUILD_DIR)
 	cd $(BUILD_DIR) && \
 	cmake -DCMAKE_TOOLCHAIN_FILE=../mips-toolchain.cmake -DCMAKE_INSTALL_PREFIX=/usr ..
@@ -25,6 +34,7 @@ override_dh_clean:
 	rm -rf $(BUILD_DIR)
 	rm -rf $(CUR_DIR)/debian/libsodiumpp*
 	rm -rf $(CUR_DIR)/debian/files
+	rm -rf $(LIBSODIUM_DIR)
 
 override_dh_usrlocal:
 override_dh_shlibdeps:
