@@ -16,4 +16,7 @@
 .*.swp
 
 # CMake build files
-build
+obj-*
+
+# Dependencies
+modules/libsodium-1.0.16

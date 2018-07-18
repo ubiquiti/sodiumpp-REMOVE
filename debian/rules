@@ -31,7 +31,7 @@ override_dh_auto_install:
 	make DESTDIR=$(CUR_DIR)/debian/libsodiumpp install
 
 override_dh_clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf obj-*
 	rm -rf $(CUR_DIR)/debian/libsodiumpp*
 	rm -rf $(CUR_DIR)/debian/files
 	rm -rf $(LIBSODIUM_DIR)
