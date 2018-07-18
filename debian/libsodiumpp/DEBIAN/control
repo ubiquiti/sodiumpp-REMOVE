@@ -1,9 +1,0 @@
-Package: libsodiumpp
-Version: 0.1.0
-Architecture: mips
-Maintainer: UBNT Package Maintainers <maintainers@ubnt.com>
-Installed-Size: 130
-Section: contrib/python
-Priority: extra
-Description: C++ API for NaCLl
- Implementation for a C++ API for libsodium
