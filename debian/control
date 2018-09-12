@@ -2,7 +2,7 @@ Section: contrib/python
 Source: libsodiumpp
 Priority: extra
 Maintainer: UBNT Package Maintainers <maintainers@ubnt.com>
-Build-Depends: debhelper (>= 5), python-dev (>= 2.7.3), python-pycparser
+Build-Depends: debhelper (>= 5), python-dev (>= 2.7.3)<debbuildopt.archindep>, python-pycparser<debbuildopt.archindep>
 Standards-Version: 3.7.2
 
 Package: libsodiumpp
